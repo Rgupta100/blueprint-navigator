@@ -1,12 +1,11 @@
 # Blueprint Navigator
 
-A minimap for Unreal Engine Blueprint graphs. Your whole Event Graph renders in a
-docked panel, however big it has grown, and clicking a node on the map jumps the
-graph straight to it.
+Keep your place in a large Blueprint graph. Blueprint Navigator adds a dockable
+minimap; click a node on the map to select and frame it in the editor.
 
 ![Click a node on the map, the graph jumps to it](docs/images/01_hero_click_to_jump.png)
 
-Unreal has a minimap for the level viewport. It has never had one for graphs.
+[View on Fab](https://www.fab.com/listings/3cb0ec86-2f86-4c88-9eee-29f81e395e1d) | [Navigation walkthrough](docs/navigation-guide.md)
 
 Documentation for the Fab plugin. Support: **money007t@gmail.com**
 
@@ -86,12 +85,9 @@ map matches what the graph editor is actually rendering.
 
 ## What it does not do
 
-**It never writes to your Blueprints.** The plugin reads node positions and writes
-only to the graph editor's *view* — scroll position and selection. It cannot add,
-remove, move, or reconnect a node, cannot mark an asset dirty, and cannot corrupt a
-graph. Close the panel and there is no trace it was ever there.
+The plugin changes editor view position and selection. It does not provide operations to add, delete, move or reconnect graph nodes. Keep your usual project backups and report any unexpected behavior.
 
-**It never talks to the internet.** No telemetry, no analytics, no licence check, no
+**Network behavior.** No telemetry, no analytics, no licence check, no
 update ping. It collects no data about you or your project.
 
 **It ships nothing in your game.** The module is editor-only, so it adds nothing to a
@@ -104,8 +100,7 @@ packaged build.
   your editor. Better to ship without the feature than ship that.
 - **Execution wires only, not data wires.** Data pins roughly triple the line count
   and turn the map into hair. Control flow is what you navigate by.
-- **Windows only** in 1.0.0. macOS and Linux are planned once they are properly built
-  and tested rather than assumed to work.
+- **Windows only** in 1.0.0. macOS, Linux and earlier engine versions are not verified for this release. Request the version you need through support; no release date is promised.
 
 ## Troubleshooting
 
@@ -117,8 +112,7 @@ Enabled, restart the editor.
 No Blueprint editor is open. Open one from the Content Browser.
 
 **The panel says "Open a graph tab".**
-A Blueprint is open, but you are on the Viewport or Construction Script or Details
-tab. Click the Event Graph tab.
+A Blueprint is open, but no graph tab is focused. Click the Event Graph tab, then click inside the graph.
 
 **The panel is empty even though a graph is open.**
 Click once inside the graph to give it focus. The panel follows the most recently
@@ -132,9 +126,7 @@ thousands of units out. Find it on the map, click it to jump there, and move it 
 
 **Does it modify my Blueprints?** No. See *What it does not do* above.
 
-**Does it slow the editor down?** It re-reads the focused graph a few times a second
-and only while the panel is visible. On a several-hundred-node graph the cost is not
-measurable next to the graph editor's own drawing.
+**Does it slow the editor down?** The source refresh interval is 0.1 seconds. Cost depends on graph size, graph layout and editor workload; no measured performance guarantee is available. Compare your own editor workload with the panel open and closed.
 
 **Does it work on Widget Blueprints?** Yes.
 
